@@ -1,5 +1,17 @@
 <?php
 
+/**
+ * Migration
+ *
+ * PHP version 5.5
+ *
+ * @package    app\migrations
+ * @author     Yevhen Hryshatkin <scientecs.dev@gmail.com>
+ * @copyright  2015-2016 scientecs. All rights reserved.
+ */
+
+namespace app\migrations;
+
 use yii\db\Migration;
 
 /**

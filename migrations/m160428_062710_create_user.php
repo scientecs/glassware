@@ -1,11 +1,23 @@
 <?php
 
+/**
+ * Migration
+ *
+ * PHP version 5.5
+ *
+ * @package    app\migrations
+ * @author     Yevhen Hryshatkin <scientecs.dev@gmail.com>
+ * @copyright  2015-2016 scientecs. All rights reserved.
+ */
+
+namespace app\migrations;
+
 use yii\db\Migration;
 
 /**
  * Migration for create user table
  */
-class m160428_062710_create_news_table extends Migration
+class m160428_062710_create_user extends Migration
 {
 
     public function up()
@@ -16,8 +28,8 @@ class m160428_062710_create_news_table extends Migration
             'email' => $this->string()->notNull(),
             'password' => $this->string()->notNull(),
             'birth_day' => $this->date()->notNull(),
-            'last_login' => $this->dateTime(),
-            'role' => $this->text()->notNull()
+            'group' => $this->string()->notNull(),
+            'last_login' => $this->dateTime()
         ]);
     }
 
