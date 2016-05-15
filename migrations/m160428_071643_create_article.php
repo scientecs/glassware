@@ -1,9 +1,22 @@
 <?php
 
+/**
+ * Migration
+ *
+ * PHP version 5.5
+ *
+ * @package    app\migrations
+ * @author     Yevhen Hryshatkin <scientecs.dev@gmail.com>
+ * @copyright  2015-2016 scientecs. All rights reserved.
+ */
+
+namespace app\migrations;
+
 use yii\db\Migration;
 
 class m160428_071643_create_article extends Migration
 {
+
     public function up()
     {
         $this->createTable('article', [
@@ -21,4 +34,5 @@ class m160428_071643_create_article extends Migration
     {
         $this->dropTable('article');
     }
+
 }
