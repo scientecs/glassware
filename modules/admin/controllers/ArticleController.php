@@ -1,7 +1,7 @@
 <?php
 
 /**
- * User controller
+ * Article controller
  *
  * PHP version 5.5
  *
@@ -10,29 +10,27 @@
  * @copyright  2015-2016 scientecs. All rights reserved.
  */
 
-namespace app\controllers;
+namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\User;
-use app\models\UserSearch;
+use app\modules\admin\models\Article;
+use app\modules\admin\models\ArticleSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\ForbiddenHttpException;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * ArticleController implements the CRUD actions for Article model.
  */
-class UserController extends Controller
+class ArticleController extends Controller
 {
 
     /**
-     * Check user is admin
-     * 
-     * @param type $action
+     * Check access to action
      *
+     * @param InlineAction $action
      * @return boolean
-     *
      * @throws ForbiddenHttpException
      */
     public function beforeAction($action)
@@ -63,13 +61,13 @@ class UserController extends Controller
     }
 
     /**
-     * Lists all User models.
+     * Lists all Article models.
      *
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
+        $searchModel = new ArticleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -79,7 +77,7 @@ class UserController extends Controller
     }
 
     /**
-     * Displays a single User model.
+     * Displays a single Article model.
      *
      * @param integer $id
      *
@@ -93,18 +91,14 @@ class UserController extends Controller
     }
 
     /**
-     * Creates a new User model.
+     * Creates a new Article model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-
+     *
      * @return mixed
      */
     public function actionCreate()
     {
-        if (!\Yii::$app->user->can('create')) {
-            throw new ForbiddenHttpException('Access denied');
-        }
-
-        $model = new User();
+        $model = new Article();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -116,7 +110,7 @@ class UserController extends Controller
     }
 
     /**
-     * Updates an existing User model.
+     * Updates an existing Article model.
      * If update is successful, the browser will be redirected to the 'view' page.
      *
      * @param integer $id
@@ -137,7 +131,7 @@ class UserController extends Controller
     }
 
     /**
-     * Deletes an existing User model.
+     * Deletes an existing Article model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      *
      * @param integer $id
@@ -152,18 +146,18 @@ class UserController extends Controller
     }
 
     /**
-     * Finds the User model based on its primary key value.
+     * Finds the Article model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      *
      * @param integer $id
      *
-     * @return User the loaded model
+     * @return Article the loaded model
      *
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        if (($model = Article::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

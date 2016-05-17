@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * User smodel
+ *
+ * PHP version 5.5
+ *
+ * @package    app\models
+ * @author     Yevhen Hryshatkin <scientecs.dev@gmail.com>
+ * @copyright  2015-2016 scientecs. All rights reserved.
+ */
+
 namespace app\models;
 
 use Yii;
@@ -103,7 +113,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        return Yii::$app->getSecurity()->validatePassword($password, $this->password);
     }
 
     /**
