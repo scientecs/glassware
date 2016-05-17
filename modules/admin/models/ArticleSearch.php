@@ -1,28 +1,17 @@
 <?php
 
-/**
- * User serach
- *
- * PHP version 5.5
- *
- * @package    app\models
- * @author     Yevhen Hryshatkin <scientecs.dev@gmail.com>
- * @copyright  2015-2016 scientecs. All rights reserved.
- */
-
-namespace app\models;
+namespace app\modules\admin\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\User;
+use app\modules\admin\models\Article;
 
 /**
- * UserSearch represents the model behind the search form about `User`.
+ * ArticleSearch represents the model behind the search form about `app\modules\admin\models\Article`.
  */
-class UserSearch extends User
+class ArticleSearch extends Article
 {
-
     /**
      * @inheritdoc
      */
@@ -30,7 +19,7 @@ class UserSearch extends User
     {
         return [
             [['id'], 'integer'],
-            [['username', 'email', 'password', 'birth_day', 'last_login'], 'safe'],
+            [['title', 'short_description', 'description', 'published_date', 'slug', 'image'], 'safe'],
         ];
     }
 
@@ -52,7 +41,7 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        $query = User::find();
+        $query = Article::find();
 
         // add conditions that should always apply here
 
@@ -71,15 +60,15 @@ class UserSearch extends User
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'birth_day' => $this->birth_day,
-            'last_login' => $this->last_login,
+            'published_date' => $this->published_date,
         ]);
 
-        $query->andFilterWhere(['like', 'username', $this->username])
-                ->andFilterWhere(['like', 'email', $this->email])
-                ->andFilterWhere(['like', 'password', $this->password]);
+        $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'short_description', $this->short_description])
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'slug', $this->slug])
+            ->andFilterWhere(['like', 'image', $this->image]);
 
         return $dataProvider;
     }
-
 }

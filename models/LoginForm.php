@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Login form model
+ *
+ * PHP version 5.5
+ *
+ * @package    app\models
+ * @author     Yevhen Hryshatkin <scientecs.dev@gmail.com>
+ * @copyright  2015-2016 scientecs. All rights reserved.
+ */
+
 namespace app\models;
 
 use Yii;
@@ -13,12 +23,11 @@ use yii\base\Model;
  */
 class LoginForm extends Model
 {
+
     public $username;
     public $password;
     public $rememberMe = true;
-
     private $_user = false;
-
 
     /**
      * @return array the validation rules.
@@ -55,12 +64,21 @@ class LoginForm extends Model
 
     /**
      * Logs in a user using the provided username and password.
+     *
      * @return boolean whether the user is logged in successfully
      */
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
+            $user = $this->getUser();
+
+            $isLoginSuccess = Yii::$app->user->login($user, $this->rememberMe ? 3600 * 24 * 30 : 0);
+            if ($isLoginSuccess) {
+                $data = date('Y-m-d H:i:s');
+                Yii::$app->db->createCommand("UPDATE user SET last_login='" . $data . "'  WHERE id=" . $user->getId() . "")
+                        ->execute();
+            }
+            return $isLoginSuccess;
         }
         return false;
     }
@@ -78,4 +96,5 @@ class LoginForm extends Model
 
         return $this->_user;
     }
+
 }

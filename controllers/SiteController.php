@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Site controller
+ *
+ * PHP version 5.5
+ *
+ * @package    app\controllers
+ * @author     Yevhen Hryshatkin <scientecs.dev@gmail.com>
+ * @copyright  2015-2016 scientecs. All rights reserved.
+ */
+
 namespace app\controllers;
 
 use Yii;
@@ -7,7 +17,6 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use yii\web\ForbiddenHttpException;
 use app\models\SignUpForm;
 
 class SiteController extends Controller

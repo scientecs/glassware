@@ -6,6 +6,11 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\AdminModule',
+        ],
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -42,14 +47,13 @@ $config = [
             'defaultRoles' => ['user', 'admin'],
         ],
         'db' => require(__DIR__ . '/db.php'),
-    /*
-      'urlManager' => [
-      'enablePrettyUrl' => true,
-      'showScriptName' => false,
-      'rules' => [
-      ],
-      ],
-     */
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => true,
+            'rules' => [
+                '<controller>/<action>' => '<controller>/<action>',
+            ],
+        ],
     ],
     'params' => $params,
 ];

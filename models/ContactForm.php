@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Contact Form model
+ *
+ * PHP version 5.5
+ *
+ * @package    app\models
+ * @author     Yevhen Hryshatkin <scientecs.dev@gmail.com>
+ * @copyright  2015-2016 scientecs. All rights reserved.
+ */
+
 namespace app\models;
 
 use Yii;
@@ -10,12 +20,12 @@ use yii\base\Model;
  */
 class ContactForm extends Model
 {
+
     public $name;
     public $email;
     public $subject;
     public $body;
     public $verifyCode;
-
 
     /**
      * @return array the validation rules.
@@ -51,14 +61,15 @@ class ContactForm extends Model
     {
         if ($this->validate()) {
             Yii::$app->mailer->compose()
-                ->setTo($email)
-                ->setFrom([$this->email => $this->name])
-                ->setSubject($this->subject)
-                ->setTextBody($this->body)
-                ->send();
+                    ->setTo($email)
+                    ->setFrom([$this->email => $this->name])
+                    ->setSubject($this->subject)
+                    ->setTextBody($this->body)
+                    ->send();
 
             return true;
         }
         return false;
     }
+
 }
