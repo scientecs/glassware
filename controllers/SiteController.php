@@ -18,7 +18,12 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\SignUpForm;
+use app\modules\admin\models\Article;
+use yii\data\Pagination;
 
+/**
+ * Site controller
+ */
 class SiteController extends Controller
 {
 
@@ -105,6 +110,36 @@ class SiteController extends Controller
         }
 
         return $this->render('signup', ['model' => $model]);
+    }
+
+    /**
+     * Method for render all article
+     *
+     * @param string $slug
+     */
+    public function actionBlog($slug = null)
+    {
+        if ($slug === null) {
+            $query = Article::find()->where(['is_published' => 1]);
+
+            $countQuery = clone $query;
+
+            $pagination = new Pagination(['totalCount' => $countQuery->count(),
+                'pageSize' => 5]);
+
+            $models = $query->offset($pagination->offset)
+                    ->limit($pagination->limit)
+                    ->all();
+
+            return $this->render('articles', [
+                        'models' => $models,
+                        'pagination' => $pagination,
+            ]);
+        } else {
+            $article = Article::find()->where(['slug' => $slug])->one();
+
+            return $this->render('articlePage', ['article' => $article]);
+        }
     }
 
 }
