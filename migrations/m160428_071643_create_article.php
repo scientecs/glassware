@@ -26,7 +26,8 @@ class m160428_071643_create_article extends Migration
             'description' => $this->text()->notNull(),
             'published_date' => $this->date()->notNull(),
             'slug' => $this->string()->notNull()->unique(),
-            'image' => $this->string()
+            'image' => $this->string(),
+            'is_published' => $this->boolean(),
         ]);
     }
 

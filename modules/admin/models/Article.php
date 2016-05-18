@@ -14,6 +14,7 @@ namespace app\modules\admin\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "article".
@@ -25,9 +26,15 @@ use yii\db\ActiveRecord;
  * @property string $published_date
  * @property string $slug
  * @property string $image
+ * @property int is_published
  */
 class Article extends ActiveRecord
 {
+
+    /**
+     * @var UploadedFile file attribute
+     */
+    public $file;
 
     /**
      * @inheritdoc
@@ -43,18 +50,13 @@ class Article extends ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'short_description', 'description', 'published_date', 'slug'], 'required'],
+            [['title', 'short_description', 'description', 'slug'], 'required'],
             [['short_description', 'description'], 'string'],
-            ['published_date', 'generateDate'],
             [['title', 'slug', 'image'], 'string', 'max' => 255],
             [['slug'], 'unique'],
+            [['file'], 'file'],
+            [['is_published'], 'boolean'],
         ];
-    }
-
-    public function generateDate($attribute, $params)
-    {
-        var_dump('Hello');
-        die;
     }
 
     /**
@@ -70,7 +72,30 @@ class Article extends ActiveRecord
             'published_date' => 'Дата публикации',
             'slug' => 'Slug',
             'image' => 'Изображение',
+            'is_published' => 'Опубликована?'
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function save($runValidation = true, $attributeNames = null)
+    {
+        $this->file = UploadedFile::getInstance($this, 'file');
+
+        if ($this->file && $this->validate()) {
+            $path = '/uploads/' . $this->file->baseName . '.' . $this->file->extension;
+            $this->file->saveAs($path);
+            $this->image = $path;
+        }
+
+        if ($this->is_published == 1) {
+            $this->published_date = date('Y-m-d');
+        } else {
+            $this->published_date = null;
+        }
+
+        return parent::save($runValidation, $attributeNames);
     }
 
 }

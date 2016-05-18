@@ -19,7 +19,7 @@ class ArticleSearch extends Article
     {
         return [
             [['id'], 'integer'],
-            [['title', 'short_description', 'description', 'published_date', 'slug', 'image'], 'safe'],
+            [['title', 'short_description', 'description', 'published_date','is_published', 'slug', 'image'], 'safe'],
         ];
     }
 
