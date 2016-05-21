@@ -6,6 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\modules\admin\models\Article */
 
 $this->title = 'Редактировать статью: ' . $model->title;
+$this->params['breadcrumbs'][] = ['label' => 'Админ панель', 'url' => ['/admin/default']];
 $this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Редактировать';

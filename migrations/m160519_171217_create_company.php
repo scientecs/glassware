@@ -1,25 +1,16 @@
 <?php
 
-/**
- * Migration
- *
- * PHP version 5.5
- *
- * @package    app\migrations
- * @author     Yevhen Hryshatkin <scientecs.dev@gmail.com>
- * @copyright  2015-2016 scientecs. All rights reserved.
- */
-
-namespace app\migrations;
-
 use yii\db\Migration;
 
 /**
- * Migration for create company table
+ * Handles the creation for table `company`.
  */
-class m160428_074739_create_company extends Migration
+class m160519_171217_create_company extends Migration
 {
 
+    /**
+     * @inheritdoc
+     */
     public function up()
     {
         $this->createTable('company', [
@@ -36,6 +27,9 @@ class m160428_074739_create_company extends Migration
         ]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function down()
     {
         $this->dropTable('company');

@@ -3,14 +3,14 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\admin\models\Article */
+/* @var $model app\common\ProductCategory */
 
-$this->title = 'Создать статью';
+$this->title = 'Создать категорию товара';
 $this->params['breadcrumbs'][] = ['label' => 'Админ панель', 'url' => ['/admin/default']];
-$this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Категория товара', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="article-create">
+<div class="product-category-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

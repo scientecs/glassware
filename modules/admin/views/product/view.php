@@ -2,49 +2,47 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\admin\models\Article */
+/* @var $model app\common\Product */
 
-$this->title = $model->title;
+$this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Админ панель', 'url' => ['/admin/default']];
-$this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Товары', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="article-view">
+<div class="product-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?=
         Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Вы уверены что хотите удалить эту статью?',
+                'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
         ])
         ?>
     </p>
 
-    <?php $this->render('isPublished', ['model' => $model]); ?>
-
     <?=
     DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
-            'title',
-            'short_description:ntext',
+            'name',
+            'price',
             'description:ntext',
-            'published_date',
-            'slug',
+            'image',
             [
-                'label' => 'Опубликована?',
-                'value' => $model->is_published
+                'label' => 'Категории',
+                'value' => $categories,
             ],
-        ],
+        ]
     ])
     ?>
 
@@ -52,4 +50,5 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::tag('div', 'Изображение :') ?>
         <?= Html::img('@web/' . $model->image, ['width' => 200, 'height' => 200]) ?>
     <?php } ?>
+
 </div>

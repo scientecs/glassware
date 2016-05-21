@@ -1,25 +1,16 @@
 <?php
 
-/**
- * Migration
- *
- * PHP version 5.5
- *
- * @package    app\migrations
- * @author     Yevhen Hryshatkin <scientecs.dev@gmail.com>
- * @copyright  2015-2016 scientecs. All rights reserved.
- */
-
-namespace app\migrations;
-
 use yii\db\Migration;
 
 /**
- * Migration for create user table
+ * Handles the creation for table `user`.
  */
-class m160428_062710_create_user extends Migration
+class m160428_051229_create_user extends Migration
 {
-
+    
+    /**
+     * @inheritdoc
+     */
     public function up()
     {
         $this->createTable('user', [
@@ -33,6 +24,9 @@ class m160428_062710_create_user extends Migration
         ]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function down()
     {
         $this->dropTable('user');

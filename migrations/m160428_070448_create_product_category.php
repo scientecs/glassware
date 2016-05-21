@@ -9,20 +9,17 @@
  * @author     Yevhen Hryshatkin <scientecs.dev@gmail.com>
  * @copyright  2015-2016 scientecs. All rights reserved.
  */
-
-namespace app\migrations;
-
 use yii\db\Migration;
 
 /**
- * Migration for create alcgol_category table
+ * Migration for create product_category table
  */
-class m160428_070448_create_alcogol_category extends Migration
+class m160428_070448_create_product_category extends Migration
 {
 
     public function up()
     {
-        $this->createTable('alcohol_category', [
+        $this->createTable('product_category', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull()->unique()
         ]);
@@ -30,7 +27,7 @@ class m160428_070448_create_alcogol_category extends Migration
 
     public function down()
     {
-        $this->dropTable('alcohol_category');
+        $this->dropTable('product_category');
     }
 
 }

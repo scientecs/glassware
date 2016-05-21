@@ -14,8 +14,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?php if ($this->context->action->id === 'update') { ?>
-        <?= Html::img('@web' . $model->image, ['class' => 'pull-center img-responsive']) ?>
+    <?php if ($this->context->action->id === 'update' && $model->image) { ?>
+        <?= Html::img('@web/' . $model->image, ['class' => 'pull-center img-responsive']) ?>
     <?php } ?>
 
     <?= $form->field($model, 'short_description')->textarea(['rows' => 6]) ?>
@@ -24,7 +24,11 @@ use yii\widgets\ActiveForm;
 
     <?php if ($this->context->action->id === 'update') { ?>
         <?= Html::tag('span', '<strong>Дата публикации :</strong>') ?>
-        <?= Html::tag('span', Html::encode($model->published_date)) ?>
+        <?php if ($model->published_date == 1) { ?>
+            <?= Html::tag('span', Html::encode($model->published_date)) ?>
+        <?php } else { ?>
+            <?= 'Не опубликована'; ?>
+        <?php } ?>
     <?php } ?>
 
     <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
