@@ -15,6 +15,7 @@ namespace app\modules\admin\models;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
+use app\models\LoadFile;
 
 /**
  * This is the model class for table "article".
@@ -26,7 +27,7 @@ use yii\web\UploadedFile;
  * @property string $published_date
  * @property string $slug
  * @property string $image
- * @property int is_published
+ * @property integer is_published
  */
 class Article extends ActiveRecord
 {
@@ -52,10 +53,10 @@ class Article extends ActiveRecord
         return [
             [['title', 'short_description', 'description', 'slug'], 'required'],
             [['short_description', 'description'], 'string'],
-            [['title', 'slug', 'image'], 'string', 'max' => 255],
+            [['title', 'slug'], 'string', 'max' => 255],
             [['slug'], 'unique'],
-            [['file'], 'file'],
             [['is_published'], 'boolean'],
+            [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxFiles' => 1],
         ];
     }
 
@@ -72,7 +73,7 @@ class Article extends ActiveRecord
             'published_date' => 'Дата публикации',
             'slug' => 'Slug',
             'image' => 'Изображение',
-            'is_published' => 'Опубликована?'
+            'is_published' => 'Опубликовать?'
         ];
     }
 
@@ -81,12 +82,8 @@ class Article extends ActiveRecord
      */
     public function save($runValidation = true, $attributeNames = null)
     {
-        $this->file = UploadedFile::getInstance($this, 'file');
-
-        if ($this->file && $this->validate()) {
-            $path = '/uploads/' . $this->file->baseName . '.' . $this->file->extension;
-            $this->file->saveAs($path);
-            $this->image = $path;
+        if (UploadedFile::getInstance($this, 'file')) {
+            LoadFile::saveImage($this, UploadedFile::getInstance($this, 'file'));
         }
 
         if ($this->is_published == 1) {

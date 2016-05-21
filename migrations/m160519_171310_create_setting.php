@@ -1,25 +1,16 @@
 <?php
 
-/**
- * Migration
- *
- * PHP version 5.5
- *
- * @package    app\migrations
- * @author     Yevhen Hryshatkin <scientecs.dev@gmail.com>
- * @copyright  2015-2016 scientecs. All rights reserved.
- */
-
-namespace app\migrations;
-
 use yii\db\Migration;
 
 /**
- * Migration for create setting table
+ * Handles the creation for table `setting`.
  */
-class m160428_075308_create_setting extends Migration
+class m160519_171310_create_setting extends Migration
 {
 
+    /**
+     * @inheritdoc
+     */
     public function up()
     {
         $this->createTable('setting', [
@@ -30,6 +21,9 @@ class m160428_075308_create_setting extends Migration
         ]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function down()
     {
         $this->dropTable('setting');

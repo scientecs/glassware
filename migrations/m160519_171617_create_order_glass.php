@@ -1,25 +1,16 @@
 <?php
 
-/**
- * Migration
- *
- * PHP version 5.5
- *
- * @package    app\migrations
- * @author     Yevhen Hryshatkin <scientecs.dev@gmail.com>
- * @copyright  2015-2016 scientecs. All rights reserved.
- */
-
-namespace app\migrations;
-
 use yii\db\Migration;
 
 /**
- * Migration for create order glass
+ * Handles the creation for table `order_glass`.
  */
-class m160428_085350_create_order_glass extends Migration
+class m160519_171617_create_order_glass extends Migration
 {
 
+    /**
+     * @inheritdoc
+     */
     public function up()
     {
         $this->createTable('order_glass', [
@@ -40,14 +31,6 @@ class m160428_085350_create_order_glass extends Migration
         ]);
 
         $this->createIndex(
-                'idx-order_glass-order_glass_status_id', 'order_glass', 'order_glass_status_id'
-        );
-
-        $this->addForeignKey(
-                'fk-order_glass-order_glass_status_id', 'order_glass', 'order_glass_status_id', 'order_glass_status', 'id', 'CASCADE'
-        );
-
-        $this->createIndex(
                 'idx-order_glass-company_id', 'order_glass', 'company_id'
         );
 
@@ -62,8 +45,19 @@ class m160428_085350_create_order_glass extends Migration
         $this->addForeignKey(
                 'fk-order_glass-user_id', 'order_glass', 'user_id', 'user', 'id', 'CASCADE'
         );
+
+        $this->createIndex(
+                'idx-order_glass-order_glass_status_id', 'order_glass', 'order_glass_status_id'
+        );
+
+        $this->addForeignKey(
+                'fk-order_glass-order_glass_status_id', 'order_glass', 'order_glass_status_id', 'order_glass_status', 'id', 'CASCADE'
+        );
     }
 
+    /**
+     * @inheritdoc
+     */
     public function down()
     {
         $this->dropTable('order_glass');

@@ -1,31 +1,23 @@
 <?php
 
-/**
- * Article controller
- *
- * PHP version 5.5
- *
- * @package    app\controllers
- * @author     Yevhen Hryshatkin <scientecs.dev@gmail.com>
- * @copyright  2015-2016 scientecs. All rights reserved.
- */
-
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\modules\admin\models\Article;
-use app\modules\admin\models\ArticleSearch;
+use app\common\Product;
+use app\modules\admin\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\ForbiddenHttpException;
-use yii\web\UploadedFile;
 use app\models\LoadFile;
+use app\common\ProductCategory;
+use yii\helpers\ArrayHelper;
+use yii\web\ForbiddenHttpException;
+use app\modules\admin\models\ProductProductCategory;
 
 /**
- * ArticleController implements the CRUD actions for Article model.
+ * ProductController implements the CRUD actions for Product model.
  */
-class ArticleController extends Controller
+class ProductController extends Controller
 {
 
     /**
@@ -63,13 +55,13 @@ class ArticleController extends Controller
     }
 
     /**
-     * Lists all Article models.
+     * Lists all Product models.
      *
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ArticleSearch();
+        $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -79,7 +71,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Displays a single Article model.
+     * Displays a single Product model.
      *
      * @param integer $id
      *
@@ -87,32 +79,36 @@ class ArticleController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+
         return $this->render('view', [
-                    'model' => $this->findModel($id),
-                    'image' => 'dasdas']);
+                    'model' => $model,
+                    'categories' => $model->getProductNameCategories(),
+        ]);
     }
 
     /**
-     * Creates a new Article model.
+     * Creates a new Product model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      *
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Article();
+        $model = new Product();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                         'model' => $model,
+                        'productCategories' => ArrayHelper::map(ProductCategory::find()->all(), 'id', 'name')
             ]);
         }
     }
 
     /**
-     * Updates an existing Article model.
+     * Updates an existing Product model.
      * If update is successful, the browser will be redirected to the 'view' page.
      *
      * @param integer $id
@@ -128,12 +124,13 @@ class ArticleController extends Controller
         } else {
             return $this->render('update', [
                         'model' => $model,
+                        'productCategories' => ArrayHelper::map(ProductCategory::find()->all(), 'id', 'name')
             ]);
         }
     }
 
     /**
-     * Deletes an existing Article model.
+     * Deletes an existing Product model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      *
      * @param integer $id
@@ -154,18 +151,18 @@ class ArticleController extends Controller
     }
 
     /**
-     * Finds the Article model based on its primary key value.
+     * Finds the Product model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      *
      * @param integer $id
      *
-     * @return Article the loaded model
+     * @return Product the loaded model
      *
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Article::findOne($id)) !== null) {
+        if (($model = Product::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

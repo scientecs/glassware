@@ -9,20 +9,16 @@
  * @author     Yevhen Hryshatkin <scientecs.dev@gmail.com>
  * @copyright  2015-2016 scientecs. All rights reserved.
  */
-
-namespace app\migrations;
-
 use yii\db\Migration;
 
 /**
- * Migration for create broken glass table
+ * Migration for create product table
  */
-class m160428_072051_create_broken_glass extends Migration
+class m160428_064329_create_product extends Migration
 {
-
     public function up()
     {
-        $this->createTable('broken_glass', [
+        $this->createTable('product', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
             'price' => $this->decimal(10, 0)->notNull(),
@@ -33,7 +29,7 @@ class m160428_072051_create_broken_glass extends Migration
 
     public function down()
     {
-        $this->dropTable('broken_glass');
+        $this->dropTable('product');
     }
 
 }
