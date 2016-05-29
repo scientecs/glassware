@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Product model
+ *
+ * PHP version 5.5
+ *
+ * @package    app\common
+ * @author     Yevhen Hryshatkin <scientecs.dev@gmail.com>
+ * @copyright  2015-2016 scientecs. All rights reserved.
+ */
+
 namespace app\common;
 
 use Yii;

@@ -23,7 +23,7 @@ class m160519_171217_create_company extends Migration
             'longtitude' => $this->string()->notNull(),
             'address' => $this->string()->notNull(),
             'schedule' => $this->string()->notNull(),
-            'icon' => $this->string()
+            'image' => $this->string()
         ]);
     }
 
