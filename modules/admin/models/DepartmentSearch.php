@@ -1,28 +1,17 @@
 <?php
 
-/**
- * User serach
- *
- * PHP version 5.5
- *
- * @package    app\models
- * @author     Yevhen Hryshatkin <scientecs.dev@gmail.com>
- * @copyright  2015-2016 scientecs. All rights reserved.
- */
-
-namespace app\models;
+namespace app\modules\admin\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\User;
+use app\common\Department;
 
 /**
- * UserSearch represents the model behind the search form about `User`.
+ * DepartmentSearch represents the model behind the search form about `app\common\Department`.
  */
-class UserSearch extends User
+class DepartmentSearch extends Department
 {
-
     /**
      * @inheritdoc
      */
@@ -30,7 +19,7 @@ class UserSearch extends User
     {
         return [
             [['id'], 'integer'],
-            [['username', 'email', 'password', 'birth_day', 'last_login'], 'safe'],
+            [['phone', 'adress', 'latitude', 'longitude', 'schedule'], 'safe'],
         ];
     }
 
@@ -52,7 +41,7 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        $query = User::find();
+        $query = Department::find();
 
         // add conditions that should always apply here
 
@@ -71,15 +60,14 @@ class UserSearch extends User
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'birth_day' => $this->birth_day,
-            'last_login' => $this->last_login,
         ]);
 
-        $query->andFilterWhere(['like', 'username', $this->username])
-                ->andFilterWhere(['like', 'email', $this->email])
-                ->andFilterWhere(['like', 'password', $this->password]);
+        $query->andFilterWhere(['like', 'phone', $this->phone])
+            ->andFilterWhere(['like', 'adress', $this->adress])
+            ->andFilterWhere(['like', 'latitude', $this->latitude])
+            ->andFilterWhere(['like', 'longitude', $this->longitude])
+            ->andFilterWhere(['like', 'schedule', $this->schedule]);
 
         return $dataProvider;
     }
-
 }

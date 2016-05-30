@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'order_glass_status_id') ?>
 
-    <?= $form->field($model, 'company_id') ?>
+    <?= $form->field($model, 'department_id') ?>
 
     <?= $form->field($model, 'date') ?>
 

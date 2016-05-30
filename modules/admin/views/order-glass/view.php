@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'order_glass_status_id',
-            'company_id',
+            'department_id',
             'date',
             'time',
             'is_notyfication',

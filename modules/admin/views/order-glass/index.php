@@ -7,8 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\modules\admin\models\OrderGlassSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Заказы';
-$this->params['breadcrumbs'][] = ['label' => 'Панель', 'url' => ['/admin/default']];
+$this->title = 'Order Glasses';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-glass-index">
@@ -16,9 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-<!--    <p>
-        <?echo Html::a('Create Order Glass', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>-->
+    <p>
+        <?= Html::a('Create Order Glass', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -27,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'order_glass_status_id',
-            'company_id',
+            'department_id',
             'date',
             'time',
             // 'is_notyfication',

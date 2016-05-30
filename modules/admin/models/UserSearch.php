@@ -5,12 +5,12 @@ namespace app\modules\admin\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\common\Company;
+use app\models\User;
 
 /**
- * CompanySearch represents the model behind the search form about `app\common\Company`.
+ * UserSearch represents the model behind the search form about `app\models\User`.
  */
-class CompanySearch extends Company
+class UserSearch extends User
 {
     /**
      * @inheritdoc
@@ -19,7 +19,7 @@ class CompanySearch extends Company
     {
         return [
             [['id'], 'integer'],
-            [['name', 'skype', 'email', 'phone', 'latitude', 'longtitude', 'address', 'schedule'], 'safe'],
+            [['username', 'email', 'group'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class CompanySearch extends Company
      */
     public function search($params)
     {
-        $query = Company::find();
+        $query = User::find();
 
         // add conditions that should always apply here
 
@@ -60,16 +60,14 @@ class CompanySearch extends Company
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'birth_day' => $this->birth_day,
+            'last_login' => $this->last_login,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'skype', $this->skype])
+        $query->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'phone', $this->phone])
-            ->andFilterWhere(['like', 'latitude', $this->latitude])
-            ->andFilterWhere(['like', 'longtitude', $this->longtitude])
-            ->andFilterWhere(['like', 'address', $this->address])
-            ->andFilterWhere(['like', 'schedule', $this->schedule]);
+            ->andFilterWhere(['like', 'password', $this->password])
+            ->andFilterWhere(['like', 'group', $this->group]);
 
         return $dataProvider;
     }

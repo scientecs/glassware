@@ -3,16 +3,16 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\common\Company;
-use app\modules\admin\models\CompanySearch;
+use app\common\Setting;
+use app\modules\admin\models\SettingSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CompanyController implements the CRUD actions for Company model.
+ * SettingController implements the CRUD actions for Setting model.
  */
-class CompanyController extends Controller
+class SettingController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class CompanyController extends Controller
     }
 
     /**
-     * Lists all Company models.
+     * Lists all Setting models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CompanySearch();
+        $searchModel = new SettingSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class CompanyController extends Controller
     }
 
     /**
-     * Displays a single Company model.
+     * Displays a single Setting model.
      * @param integer $id
      * @return mixed
      */
@@ -57,13 +57,13 @@ class CompanyController extends Controller
     }
 
     /**
-     * Creates a new Company model.
+     * Creates a new Setting model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Company();
+        $model = new Setting();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,7 +75,7 @@ class CompanyController extends Controller
     }
 
     /**
-     * Updates an existing Company model.
+     * Updates an existing Setting model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +94,7 @@ class CompanyController extends Controller
     }
 
     /**
-     * Deletes an existing Company model.
+     * Deletes an existing Setting model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +107,15 @@ class CompanyController extends Controller
     }
 
     /**
-     * Finds the Company model based on its primary key value.
+     * Finds the Setting model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Company the loaded model
+     * @return Setting the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Company::findOne($id)) !== null) {
+        if (($model = Setting::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

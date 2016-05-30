@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'order_glass_status_id')->textInput() ?>
 
-    <?= $form->field($model, 'company_id')->textInput() ?>
+    <?= $form->field($model, 'department_id')->textInput() ?>
 
     <?= $form->field($model, 'date')->textInput() ?>
 

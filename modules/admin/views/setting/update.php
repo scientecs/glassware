@@ -3,15 +3,15 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\common\Company */
+/* @var $model app\common\Setting */
 
-$this->title = 'Редактировать компании: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Панель', 'url' => ['/admin/default']];
-$this->params['breadcrumbs'][] = ['label' => 'Компания', 'url' => ['index']];
+$this->title = 'Редактировать настройку: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Админ панель', 'url' => ['/admin/default']];
+$this->params['breadcrumbs'][] = ['label' => 'Настройки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Редактировать';
 ?>
-<div class="company-update">
+<div class="setting-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
