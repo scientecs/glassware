@@ -18,7 +18,7 @@ class OrderGlassSearch extends OrderGlass
     public function rules()
     {
         return [
-            [['id', 'order_glass_status_id', 'company_id', 'is_notyfication', 'count_alcogol', 'count_bank', 'user_id'], 'integer'],
+            [['id', 'order_glass_status_id', 'department_id', 'is_notyfication', 'count_alcogol', 'count_bank', 'user_id'], 'integer'],
             [['date', 'time'], 'safe'],
             [['profit_alcogol', 'profit_bank', 'profit_broken_glass', 'total_profit', 'weight_broken_glass'], 'number'],
         ];
@@ -62,7 +62,7 @@ class OrderGlassSearch extends OrderGlass
         $query->andFilterWhere([
             'id' => $this->id,
             'order_glass_status_id' => $this->order_glass_status_id,
-            'company_id' => $this->company_id,
+            'department_id' => $this->department_id,
             'date' => $this->date,
             'is_notyfication' => $this->is_notyfication,
             'profit_alcogol' => $this->profit_alcogol,

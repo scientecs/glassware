@@ -54,16 +54,11 @@ class SignUpForm extends Model
             $user = new User();
             $user->username = $this->username;
             $user->email = $this->email;
-            $user->setPassword($this->password);
+            $user->password = $this->password;
             $user->generateAuthKey();
             $user->birth_day = date("Y-m-d", strtotime($this->birthDay));
             $user->group = 'user';
-
-            if ($user->save(false)) {
-                $authManager = Yii::$app->authManager;
-                $userRole = $authManager->getRole('user');
-                $authManager->assign($userRole, $user->getId());
-            }
+            $user->save(false);
 
             return $user;
         }

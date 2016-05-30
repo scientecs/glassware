@@ -46,6 +46,18 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
+    public function rules()
+    {
+        return [
+            [['username', 'email', 'password', 'birth_day', 'group'], 'required'],
+            [['birth_day', 'last_login'], 'safe'],
+            [['username', 'email', 'password'], 'string', 'max' => 255],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [
@@ -102,6 +114,24 @@ class User extends ActiveRecord implements IdentityInterface
     public function setPassword($password)
     {
         $this->password = Yii::$app->security->generatePasswordHash($password);
+
+        return $this->password;
+    }
+
+    /**
+     *
+     *
+     * @param type $insert
+     * @return boolean
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            $this->setPassword($this->password);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

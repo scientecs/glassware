@@ -16,7 +16,7 @@ class m160519_171617_create_order_glass extends Migration
         $this->createTable('order_glass', [
             'id' => $this->primaryKey(),
             'order_glass_status_id' => $this->integer()->notNull(),
-            'company_id' => $this->integer()->notNull(),
+            'department_id' => $this->integer()->notNull(),
             'date' => $this->date()->notNull(),
             'time' => $this->string()->notNull(),
             'is_notyfication' => $this->smallInteger()->defaultValue(0),
@@ -31,11 +31,11 @@ class m160519_171617_create_order_glass extends Migration
         ]);
 
         $this->createIndex(
-                'idx-order_glass-company_id', 'order_glass', 'company_id'
+                'idx-order_glass-department_id', 'order_glass', 'department_id'
         );
 
         $this->addForeignKey(
-                'fk-order_glass-company_id', 'order_glass', 'company_id', 'company', 'id', 'CASCADE'
+                'fk-order_glass-department_id', 'order_glass', 'department_id', 'department', 'id', 'CASCADE'
         );
 
         $this->createIndex(
