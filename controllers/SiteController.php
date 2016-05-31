@@ -20,6 +20,8 @@ use app\models\ContactForm;
 use app\models\SignUpForm;
 use app\modules\admin\models\Article;
 use yii\data\Pagination;
+use app\common\Department;
+use yii\db\Query;
 
 /**
  * Site controller
@@ -83,6 +85,8 @@ class SiteController extends Controller
     {
         $model = new ContactForm();
 
+        $departments = (new Query())->from('department')->all();
+
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
 
@@ -90,6 +94,7 @@ class SiteController extends Controller
         }
         return $this->render('contact', [
                     'model' => $model,
+                    'departments' => $departments,
         ]);
     }
 
